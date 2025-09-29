@@ -9,7 +9,7 @@ const MessageSchema = new mongoose.Schema({
 
     content: {
         type: String,
-        require: true
+        required: true
     },
 
     timestamp: {
@@ -35,7 +35,7 @@ const ThreadSchema = new mongoose.Schema({
         default: "New Chat"
     },
 
-    messages: { MessageSchema },
+    messages: [MessageSchema],
     createdAt: {
         type: Date,
         default: Date.now
