@@ -15,7 +15,7 @@ function ChatWindow() {
             {/* <Chat></Chat> */}
 
             <div className="chatInput">
-                <div className="userInput">
+                <div className="inputBox">
                     <input placeholder="Ask anything">
 
                     </input>
@@ -24,7 +24,7 @@ function ChatWindow() {
                     </div>
                 </div>
                 <p className="info">
-                    EurekGPT can make mistakes. Check important info. See Cookie Preferences.
+                    EurekaGPT can make mistakes. Check important info. See Cookie Preferences.
                 </p>
             </div>
         </div>
