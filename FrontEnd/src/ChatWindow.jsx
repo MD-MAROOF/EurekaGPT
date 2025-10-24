@@ -1,8 +1,32 @@
 import "./ChatWindow.css";
-function ChatWindow(){
+function ChatWindow() {
     return (
-        <div>
-            chatWindow
+        <div className="chatWindow">
+            <div className="navbar">
+                <span>
+                    EurekaGPT
+
+                    <i class="fa-solid fa-caret-down"></i>
+                </span>
+                <div className="userIconDiv">
+                    <span className="userIcon"> <i class="fa-solid fa-user"></i></span>
+                </div>
+            </div>
+            {/* <Chat></Chat> */}
+
+            <div className="chatInput">
+                <div className="userInput">
+                    <input placeholder="Ask anything">
+
+                    </input>
+                    <div id="submit">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </div>
+                </div>
+                <p className="info">
+                    EurekGPT can make mistakes. Check important info. See Cookie Preferences.
+                </p>
+            </div>
         </div>
     )
 }

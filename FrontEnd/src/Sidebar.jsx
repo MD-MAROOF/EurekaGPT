@@ -1,21 +1,22 @@
 import "./Sidebar.css";
+import logo from "./assets/gptlogo.jpg";
 
 function Sidebar(){
     return (
         <section className = "sidebar">
             {/* new chat button */}
             <button>
-                <img src="src/assets/blacklogo.png" alt="gpt log o" className="logo"></img>
+                <img src="src/assets/gptlogo.jpg" alt="gpt log o" className="logo"></img>
                 <span><i className="fa-solid fa-pen-to-square"></i></span>
                 
             </button>
 
             {/* history  */}
             <ul className="history">
-                <li>history1</li>
-                <li>history2</li>
-                <li>history3</li>
-            </ul>
+                <li>Thread 1</li>
+                <li>Thread 2</li>
+                <li>Thread 3</li>
+            </ul>   
 
             {/* sign  */}
             <div className="sign">
