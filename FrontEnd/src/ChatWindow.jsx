@@ -2,18 +2,18 @@
 import "./ChatWindow.css";
 import Chat from "./Chat.jsx";
 import { MyContext } from "./MyContext.jsx";
-import { useContext, useState } from "react";
-import {RingLoader} from "react-spinners";
+import { useContext, useState, useEffect } from "react";
+import { RingLoader } from "react-spinners";
 
 
 function ChatWindow() {
 
-    const {prompt, setPrompt, reply, setReply, currThreadId} = useContext(MyContext);
+    const { prompt, setPrompt, reply, setReply, currThreadId, prevChats, setPrevChats } = useContext(MyContext);
     const [loading, setLoading] = useState(false);
 
     const getReply = async () => {
         setLoading(true);
-        console.log("message", prompt, "ThreadId",currThreadId);
+        console.log("message", prompt, "ThreadId", currThreadId);
         const options = {
             method: "POST",
             headers: {
@@ -29,13 +29,31 @@ function ChatWindow() {
             const response = await fetch("http://localhost:8080/api/chat", options);
             const res = await response.json();
             console.log(res);
-            setReply(res);
-        } 
+            setReply(res.reply);
+        }
         catch (err) {
             console.log(err);
         }
         setLoading(false);
     }
+
+    //This function is to append new chats to already existing (previous chats)
+    useEffect(() => {
+        if (prompt && reply) {
+            setPrevChats(prevChats => (
+                [...prevChats, {
+                    role: "user",
+                    content: prompt,
+                }, {
+                    role: "assistant",
+                    content: reply
+                }]
+            ))
+        }
+
+        setPrompt("");
+    }, [reply]);
+
 
     return (
         <div className="chatWindow">
@@ -49,8 +67,8 @@ function ChatWindow() {
                     <span className="userIcon"> <i className="fa-solid fa-user"></i></span>
                 </div>
             </div>
-            {/* <Chat></Chat> */}
-            <RingLoader color = "#fff" loading={loading}>
+            <Chat></Chat>
+            <RingLoader color="#fff" loading={loading}>
 
             </RingLoader>
 
@@ -59,7 +77,7 @@ function ChatWindow() {
                     <input placeholder="Ask anything"
                         value={prompt}
                         onChange={(e) => setPrompt(e.target.value)}
-                        onKeyDown={(e)=>e.key === 'Enter' ? getReply():''}
+                        onKeyDown={(e) => e.key === 'Enter' ? getReply() : ''}
                     >
 
                     </input>
